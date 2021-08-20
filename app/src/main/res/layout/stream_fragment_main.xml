@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Grey_700"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="bottom"
+            android:src="@drawable/ic_chevron_left_white_36dp"
+            android:textAllCaps="false"/>
+        <EditText
+            android:id="@+id/et_url"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:background="@color/Grey_300"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/btn_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="play/pause"
+            android:textAllCaps="false"/>
+    </LinearLayout>
+    <com.fiill.fiillplayer.streamplayer.VideoView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_marginTop="3dp"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+      <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/cb_pwf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="portrait when fullScreen"/>
+                    <Button
+                        android:id="@+id/btn_full"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="full screen"
+                        android:textAllCaps="false" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_play_float"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="float window"
+                    android:textAllCaps="false" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <Button
+                        android:id="@+id/btn_play_in_standalone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="standalone mode"
+                        android:textAllCaps="false" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <RadioGroup
+                    android:id="@+id/rg_ra"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/rb_fit_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="default"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_fill_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="fill parent"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="wrap content"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="match parent"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_16_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="16:9"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_4_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4:3"/>
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
+      </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
