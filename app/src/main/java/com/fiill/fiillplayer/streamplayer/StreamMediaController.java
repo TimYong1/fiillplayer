@@ -104,7 +104,7 @@ public class StreamMediaController implements IStreamMediaController,Handler.Cal
             if (!videoView.isCurrentActivePlayer()) {
                 return;
             }
-            viewquery.id(R.id.app_video_status).gone();//移动时隐藏掉状态image
+            viewquery.id(R.id.app_video_status).gone();//hide image when moving
             StreamFiillPlayer player = videoView.getPlayer();
             int newPosition = (int) (player.getDuration() * (progress * 1.0 / 1000));
             String time = generateTime(newPosition);
@@ -199,7 +199,6 @@ public class StreamMediaController implements IStreamMediaController,Handler.Cal
         return position;
     }
 
-
     protected void show(int timeout) {
         if (!isShowing) {
             if (videoView.getVideoInfo().isShowTopBar() || displayModel == StreamFiillPlayer.DISPLAY_FULL_WINDOW) {
@@ -217,7 +216,6 @@ public class StreamMediaController implements IStreamMediaController,Handler.Cal
         if (timeout != 0) {
             handler.sendMessageDelayed(handler.obtainMessage(MESSAGE_FADE_OUT), timeout);
         }
-
     }
 
 
@@ -226,7 +224,6 @@ public class StreamMediaController implements IStreamMediaController,Handler.Cal
             show = false;
         }
         viewquery.id(R.id.app_video_bottom_box).visibility(show ? View.VISIBLE : View.GONE);
-
     }
 
     protected void hide(boolean force) {
@@ -236,7 +233,6 @@ public class StreamMediaController implements IStreamMediaController,Handler.Cal
             viewquery.id(R.id.app_video_top_box).gone();
             isShowing = false;
         }
-
     }
 
     public StreamMediaController(Context ctx) {
@@ -325,7 +321,6 @@ public class StreamMediaController implements IStreamMediaController,Handler.Cal
                     return true;
                 }
 
-                // 处理手势结束
                 switch (event.getAction() & MotionEvent.ACTION_MASK) {
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
@@ -439,12 +434,9 @@ public class StreamMediaController implements IStreamMediaController,Handler.Cal
         private boolean volumeControl;
         private boolean toSeek;
 
-        /**
-         * 双击
-         */
         @Override
         public boolean onDoubleTap(MotionEvent e) {
-//            Toast.makeText(context, "onDoubleTap", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(context, "onDoubleTap", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -455,9 +447,6 @@ public class StreamMediaController implements IStreamMediaController,Handler.Cal
 
         }
 
-        /**
-         * 滑动
-         */
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             //1. if not the active player,ignore
@@ -505,12 +494,6 @@ public class StreamMediaController implements IStreamMediaController,Handler.Cal
         }
     }
 
-
-    /**
-     * 滑动改变声音大小
-     *
-     * @param percent
-     */
     private void onVolumeSlide(float percent) {
         if (volume == -1) {
             volume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
@@ -525,16 +508,14 @@ public class StreamMediaController implements IStreamMediaController,Handler.Cal
         else if (index < 0)
             index = 0;
 
-        // 变更声音
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, index, 0);
 
-        // 变更进度条
         int i = (int) (index * 1.0 / maxVolume * 100);
         String s = i + "%";
         if (i == 0) {
             s = "off";
         }
-        // 显示
+
         viewquery.id(R.id.app_video_volume_icon).image(i == 0 ? R.drawable.ic_volume_off_white_36dp : R.drawable.ic_volume_up_white_36dp);
         viewquery.id(R.id.app_video_brightness_box).gone();
         viewquery.id(R.id.app_video_volume_box).visible();
@@ -567,14 +548,9 @@ public class StreamMediaController implements IStreamMediaController,Handler.Cal
             viewquery.id(R.id.app_video_fastForward_target).text(generateTime(newPosition) + "/");
             viewquery.id(R.id.app_video_fastForward_all).text(generateTime(duration));
         }
-//        handler.sendEmptyMessage(MESSAGE_SEEK_NEW_POSITION);
+        handler.sendEmptyMessage(MESSAGE_SEEK_NEW_POSITION);
     }
 
-    /**
-     * 滑动改变亮度
-     *
-     * @param percent
-     */
     private void onBrightnessSlide(float percent) {
         Window window = ((Activity) context).getWindow();
         if (brightness < 0) {
@@ -609,8 +585,7 @@ public class StreamMediaController implements IStreamMediaController,Handler.Cal
                 statusChange(STATUS_PLAYING);
                 break;
             case IMediaPlayer.MEDIA_INFO_NETWORK_BANDWIDTH:
-                //显示 下载速度
-//                        Toaster.show("download rate:" + extra);
+                //Toaster.show("download rate:" + extra);
                 break;
             case IMediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START:
                 statusChange(STATUS_PLAYING);
