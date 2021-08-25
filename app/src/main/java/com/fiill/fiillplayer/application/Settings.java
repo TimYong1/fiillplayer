@@ -58,12 +58,6 @@ public class Settings {
         return mSharedPreferences.getString(key, "");
     }
 
-
-    public boolean getEnableSurfaceView() {
-        String key = mAppContext.getString(R.string.pref_key_enable_surface_view);
-        return mSharedPreferences.getBoolean(key, false);
-    }
-
     public boolean getEnableTextureView() {
         String key = mAppContext.getString(R.string.pref_key_enable_texture_view);
         return mSharedPreferences.getBoolean(key, false);

@@ -46,25 +46,18 @@
             android:persistent="true"
             android:summary="@string/pref_summary_using_opensl_es"
             android:title="@string/pref_title_using_opensl_es" />
-    </PreferenceCategory>
-    <PreferenceCategory android:title="@string/pref_title_render_view">
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="@string/pref_key_enable_surface_view"
+        <EditTextPreference
+            android:defaultValue=""
+            android:key="@string/pref_key_ntp_server_address"
             android:persistent="true"
-            android:summary="@string/pref_summary_enable_surface_view"
-            android:title="@string/pref_title_enable_surface_view" />
+            android:title="@string/pref_title_ntp_server_address"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_title_texture_view">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_key_enable_texture_view"
             android:persistent="true"
             android:summary="@string/pref_summary_enable_texture_view"
             android:title="@string/pref_title_enable_texture_view" />
-
-        <EditTextPreference
-            android:defaultValue=""
-            android:key="@string/pref_key_ntp_server_address"
-            android:persistent="true"
-            android:title="@string/pref_title_ntp_server_address"/>
     </PreferenceCategory>
 </PreferenceScreen>

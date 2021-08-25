@@ -37,8 +37,7 @@ android {
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.squareup:otto:1.3.8'
-    implementation 'androidx.preference:preference:1.1.1
+    implementation 'androidx.preference:preference:1.1.1'
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':ijkplayer-java')
