@@ -490,6 +490,43 @@ public class StreamFiillPlayer implements MediaController.MediaPlayerControl {
                     continue;
                 }
             }
+            boolean usingMediaCodec = mSettings.getUsingMediaCodec();
+            boolean usingMediaCodecAutoRotate = mSettings.getUsingMediaCodecAutoRotate();
+            boolean usingOpenSLES = mSettings.getUsingOpenSLES();
+            String pixelFormat = mSettings.getPixelFormat();
+            ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 48);
+            ijkMediaPlayer.native_setLogLevel(
+                    Settings.Config.isDebug()?
+                            IjkMediaPlayer.IJK_LOG_DEBUG:IjkMediaPlayer.IJK_LOG_ERROR);
+            ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 48);
+
+            if (usingMediaCodec) {
+                ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
+                if (usingMediaCodecAutoRotate) {
+                    ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 1);
+                } else {
+                    ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 0);
+                }
+            } else {
+                ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 0);
+            }
+
+            ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "opensles", usingOpenSLES ? 1 : 0);
+
+            if (TextUtils.isEmpty(pixelFormat)) {
+                ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "overlay-format", IjkMediaPlayer.SDL_FCC_RV32);
+            } else {
+                ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "overlay-format", pixelFormat);
+            }
+            //support H265
+            ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-hevc", 1);
+
+            ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "framedrop", 1);
+            ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "start-on-prepared", 0);
+
+            ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "http-detect-range-support", 0);
+            ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "timeout", 10000000);
+            ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "reconnect", 1);
         } else if (mediaPlayer instanceof AndroidMediaPlayer) {
             for (Option option : videoInfo.getOptions()) {
                 if (IjkMediaPlayer.OPT_CATEGORY_FORMAT == option.getCategory() && "headers".equals(option.getName())) {

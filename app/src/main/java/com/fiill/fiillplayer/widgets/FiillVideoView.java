@@ -283,17 +283,16 @@ public class FiillVideoView extends FrameLayout implements MediaController.Media
                 if (mUri != null) {
                     ijkMediaPlayer = new IjkMediaPlayer();
                     ijkMediaPlayer.native_setLogLevel(
-					    Settings.Config.isDebug()?
-						    IjkMediaPlayer.IJK_LOG_DEBUG:IjkMediaPlayer.IJK_LOG_ERROR);
-					usingMediaCodec = mSettings.getUsingMediaCodec();
+                            Settings.Config.isDebug()?
+                            IjkMediaPlayer.IJK_LOG_DEBUG:IjkMediaPlayer.IJK_LOG_ERROR);
+                    usingMediaCodec = mSettings.getUsingMediaCodec();
                     usingMediaCodecAutoRotate = mSettings.getUsingMediaCodecAutoRotate();
-					usingOpenSLES = mSettings.getUsingOpenSLES();
-					pixelFormat = mSettings.getPixelFormat();
-                    ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 48);
+                    usingOpenSLES = mSettings.getUsingOpenSLES();
+                     pixelFormat = mSettings.getPixelFormat();
 
                     if (usingMediaCodec) {
                         ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
-					    ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-hevc", 1);
+                        ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-hevc", 1);
                         if (usingMediaCodecAutoRotate) {
                             ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 1);
                         } else {
@@ -310,6 +309,10 @@ public class FiillVideoView extends FrameLayout implements MediaController.Media
                     } else {
                         ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "overlay-format", pixelFormat);
                     }
+                    //support H265
+                    ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-hevc", 1);
+
+                    ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 48);
                     ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "framedrop", 1);
                     ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "start-on-prepared", 0);
 
